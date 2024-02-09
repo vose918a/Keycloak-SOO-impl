@@ -1,0 +1,18 @@
+{
+  "realm": "OAuth2-demo-realm",
+  "auth-server-url": "http://localhost:8081",
+  "resource": "OAuth2-demo",
+  "credentials":{
+    "secret": "aSVTTNNDjopEveO0Y8LiYTqkdUB5XQrZ"
+  },
+  "paths": [
+    {
+      "path": "/swagger-ui/*",
+      "enforcement-mode":"DISABLED"
+    },
+    {
+      "path": "/v3/api-docs/*",
+      "enforcement-mode":"DISABLED"
+    }
+  ]
+}
