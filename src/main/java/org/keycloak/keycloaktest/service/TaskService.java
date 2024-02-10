@@ -1,8 +1,9 @@
 package org.keycloak.keycloaktest.service;
 
 import lombok.AllArgsConstructor;
-import org.keycloak.keycloaktest.entity.Task;
+import org.keycloak.keycloaktest.document.Task;
 import org.keycloak.keycloaktest.repository.TaskRepository;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -29,7 +30,13 @@ public class TaskService {
     }
 
     public Task createNewTask(Task task){
-        return taskRepository.save(task);
+        try {
+            if(taskRepository.findById(task.getId()).isEmpty()) {
+                return taskRepository.save(task);
+            } else {return null;}
+        }catch(Exception e){
+            throw new IllegalStateException(e.getMessage());
+        }
     }
 
     public Task updateTask(Task newTask,String id){
@@ -65,5 +72,10 @@ public class TaskService {
         task.setCretedDate(taskOptional.get().getCretedDate());
         task.setOwnerId(taskOptional.get().getOwnerId());
         return task;
+    }
+
+    public UUID getSubFromJWT(Jwt jwt){
+        String sub = jwt.getClaim("sub");
+        return UUID.fromString(sub);
     }
 }

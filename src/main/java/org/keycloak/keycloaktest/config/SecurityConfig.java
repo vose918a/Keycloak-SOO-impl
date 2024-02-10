@@ -34,8 +34,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-                .oauth2ResourceServer(OAuth -> OAuth.jwt(t -> t.jwtAuthenticationConverter(jwtAuthConverter)))
+        http.csrf(csrf -> csrf.disable()).oauth2ResourceServer(OAuth -> OAuth.jwt(t -> t.jwtAuthenticationConverter(jwtAuthConverter)))
                 .addFilterAfter(createServletPolicyEnforcerFilter(), BearerTokenAuthenticationFilter.class)
                 .sessionManagement( t -> t.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();

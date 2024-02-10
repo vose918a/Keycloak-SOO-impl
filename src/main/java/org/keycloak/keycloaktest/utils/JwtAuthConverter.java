@@ -57,7 +57,7 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
         return list;
     }
 
-    private String getPrincipleName(Jwt jwt) {
+    public String getPrincipleName(Jwt jwt) {
         String claimName = JwtClaimNames.SUB;
 
         if (principleAttribute != null){claimName = principleAttribute;}

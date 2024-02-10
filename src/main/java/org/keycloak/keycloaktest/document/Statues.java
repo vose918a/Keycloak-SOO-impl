@@ -1,4 +1,4 @@
-package org.keycloak.keycloaktest.entity;
+package org.keycloak.keycloaktest.document;
 
 public enum Statues {
     PENDING,
