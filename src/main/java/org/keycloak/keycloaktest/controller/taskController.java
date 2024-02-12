@@ -49,7 +49,7 @@ public class taskController {
     }
 
     @PutMapping("/update/{taskId}") @PreAuthorize("hasRole('user_client_role')")
-    public ResponseEntity<Task> updateTask(@RequestParam String taskId,@RequestBody TaskDTO taskDTO){
+    public ResponseEntity<Task> updateTask(@PathVariable String taskId,@RequestBody TaskDTO taskDTO){
         Task task = new Task();
         task.setDescription(taskDTO.getDescription());
         task.setStatus(Statues.valueOf(taskDTO.getStatus()));
@@ -57,7 +57,7 @@ public class taskController {
     }
 
     @DeleteMapping("/delete/{taskId}") @PreAuthorize("hasRole('user_client_role')")
-    public ResponseEntity<?> deleteTask(@RequestParam String taskId){
+    public ResponseEntity<?> deleteTask(@PathVariable String taskId){
         return taskService.deleteTask(taskId) ?
                 ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
